@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 // GET page model
-const Page = require("../../../models/page")
+const Page = require("../../../includes/models/page")
 /*
 * GET /
 */
@@ -11,11 +11,14 @@ router.get("/", function (req, res) {
         if (err) {
             console.log(err);
         }
-            res.render("index", {
-                title: page.title,
-                content: page.content
-            })
-        
+        res.render("index", {
+            title: page.title,
+            content: page.content,
+            keywords: page.keywords,
+            description: page.description,
+            author: page.author
+        })
+
     })
 })
 
@@ -35,7 +38,10 @@ router.get("/:slug", function (req, res) {
         } else {
             res.render("index", {
                 title: page.title,
-                content: page.content
+                content: page.content,
+                keywords: page.keywords,
+                description: page.description,
+                author: page.author
             })
         }
     })

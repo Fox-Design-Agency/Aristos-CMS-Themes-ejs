@@ -4,7 +4,7 @@ const passport = require("passport")
 const bcrypt = require("bcryptjs")
 
 // GET User model
-const User = require("../../../models/user")
+const User = require("../../../includes/models/user")
 /*
 * GET register
 */

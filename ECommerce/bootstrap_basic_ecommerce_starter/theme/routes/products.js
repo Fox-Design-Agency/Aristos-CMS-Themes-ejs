@@ -2,9 +2,9 @@ const express = require("express")
 const router = express.Router();
 const fs = require("fs-extra");
 // GET Product model
-const Product = require("../../../models/product")
+const Product = require("../../upgrade/products/models/product")
 // GET Product Category model
-const Category = require("../../../models/productCategory")
+const Category = require("../../upgrade/products/models/productCategory")
 
 /*
 * GET  all products
@@ -17,7 +17,10 @@ router.get("/", function (req, res) {
         }
         res.render("all_products", {
             title: "All products",
-            products: products
+            products: products,
+            description: "",
+            author: "",
+            keywords: ""
         })
 
     })
@@ -38,7 +41,10 @@ router.get("/:category", function (req, res) {
             }
             res.render("cat_products", {
                 title: c.title,
-                products: products
+                products: products,
+                description: c.description,
+                author: c.author,
+                keywords: c.keywords
             })
 
         })
@@ -52,12 +58,12 @@ router.get("/:category", function (req, res) {
 router.get("/:category/:product", function (req, res) {
 
     let galleryImages = null;
- let loggedIn = (req.isAuthenticated()) ? true: false
+    let loggedIn = (req.isAuthenticated()) ? true : false
     Product.findOne({ slug: req.params.product }, function (err, product) {
         if (err) {
             console.log(err)
         } else {
-            let galleryDir = "public/product_images/" + product._id + "/gallery";
+            let galleryDir = "content/public/images/product_images/" + product._id + "/gallery";
 
             fs.readdir(galleryDir, function (err, files) {
                 if (err) {
@@ -69,7 +75,10 @@ router.get("/:category/:product", function (req, res) {
                         title: product.title,
                         product: product,
                         galleryImages: galleryImages,
-                        loggedIn: loggedIn
+                        loggedIn: loggedIn,
+                        author: product.author,
+                        description: product.description,
+                        keywords: product.keywords
                     })
                 }
 

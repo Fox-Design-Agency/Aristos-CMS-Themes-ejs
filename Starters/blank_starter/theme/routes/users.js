@@ -4,7 +4,7 @@ const passport = require("passport")
 const bcrypt = require("bcryptjs")
 
 // GET User model
-const User = require("../../../models/user")
+const User = require("../../../includes/models/user")
 /*
 * GET register
 */
@@ -12,7 +12,10 @@ const User = require("../../../models/user")
 router.get("/register", function (req, res) {
 
     res.render("register", {
-        title: "Register"
+        title: "Register",
+        author: "",
+        description: "",
+        keywords: ""
     })
 })
 
@@ -40,7 +43,10 @@ router.post("/register", function (req, res) {
         res.render("register", {
             errors: errors,
             user: null,
-            title: "Register"
+            title: "Register",
+            author: "",
+            description: "",
+            keywords: ""
         })
     } else {
         User.findOne({ username: username }, function (err, user) {
@@ -86,7 +92,10 @@ router.get("/login", function (req, res) {
 
     if (res.locals.user) res.render("/")
     res.render("login", {
-        title: "Log in"
+        title: "Log in",
+        author: "",
+        description: "",
+        keywords: ""
     })
 })
 

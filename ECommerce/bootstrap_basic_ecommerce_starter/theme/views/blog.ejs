@@ -1,0 +1,17 @@
+<% include _layouts/header %>
+
+    <%- content %>
+
+        <% blogs.forEach(function(blog){ %>
+            <a href="/blog/<%= blog.slug %>"><div>
+                <h3>
+                    <%= blog.title %>
+                </h3>
+                <p>
+                    <%= blog.description %>
+                </p>
+            </div></a>
+
+            <% }) %>
+
+                <% include _layouts/footer %>

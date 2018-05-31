@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 // GET product model
-const Product = require("../../../models/product")
+const Product = require("../../upgrade/products/models/product")
 
 /*
 * GET  add product to cart
@@ -55,7 +55,7 @@ router.get("/add/:product", function (req, res) {
 * GET  checkout product
 */
 router.get("/checkout", function (req, res) {
-    let email = require("../../../config/stuff")
+    let email = require("../../../includes/config/stuff")
     if (req.session.cart && req.session.cart.length == 0) {
         delete req.session.cart
         res.redirect("/cart/checkout");
