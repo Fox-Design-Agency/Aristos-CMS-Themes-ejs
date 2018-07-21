@@ -11,26 +11,32 @@
     <title>Aristos CMS -
         <%= title %>
     </title>
-    <link rel="stylesheet" href="/css/main.css" />
+     <!-- build:css(content/temp) /styles/theme.css-->
+     <link rel="stylesheet" href="/styles/theme.css" />
+     <!-- endbuild -->
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Aristos CMS</a>
-
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="nav navbar-nav mr-auto">
+    <nav class="header__main">
+    <div class="header__menu-icon">
+    <div class="header__menu-icon__middle"></div>
+</div>
+<div class="header__brand">
+        <a href="/">Aristos CMS</a>
+</div>
+        <div class="">
+            <ul class="header__menu-content">
                 <% pages.forEach(function(page){ %>
 
                     <% if (page.slug == "home"){ %>
                         <li>
-                            <a class="nav-link" href="/">
+                            <a class="header__menu-content--link" href="/">
                                 <%= page.title %>
                             </a>
                         </li>
                         <% } else{ %>
                             <li>
-                                <a class="nav-link" href="/<%= page.slug %>">
+                                <a class="header__menu-content--link" href="/<%= page.slug %>">
                                     <%= page.title %>
                                 </a>
                             </li>
@@ -38,36 +44,27 @@
                                 <% }) %>
 
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="header__menu-content header__menu-content--right">
                 <% if (user) { %>
                     <li>
-                        <a class="nav-link" href="/users/logout">Hi,
+                        <a class="header__menu-content--link" href="/users/logout">Hi,
                             <%= user.username %> ( Logout )</a>
                     </li>
                     <% } else{ %>
                         <li>
-                            <a class="nav-link" href="/users/register">Register</a>
+                            <a class="header__menu-content--link" href="/users/register">Register</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="/users/login">Log in</a>
+                            <a class="header__menu-content--link" href="/users/login">Log in</a>
                         </li>
                         <% } %>
                             <% if (user && user.admin == 1) { %>
                                 <li>
-                                    <a class="nav-link" href="/admin/pages">Admin Area</a>
+                                    <a class="header__menu-content--link" href="/admin">Admin Area</a>
                                 </li>
                                 <% } %>
             </ul>
         </div>
     </nav>
 
-    <main role="main" class="container">
-        <%- messages("messages", locals) %>
-
-            <% if (errors) { %>
-                <% errors.forEach(function(error){ %>
-                    <div class="alert alert-danger">
-                        <%= error.msg %>
-                    </div>
-                    <% }) %>
-                        <% } %>
+    <main role="main" class="">
