@@ -2,7 +2,7 @@ const passport = require("passport");
 
 module.exports = {
   register(req, res, next) {
-    res.render("register", {
+    res.render("users/register", {
       title: "Register",
       author: "",
       description: "",
@@ -17,7 +17,7 @@ module.exports = {
     if (res.locals.user) {
       res.redirect("/");
     } else {
-      res.render("login", {
+      res.render("users/login", {
         title: "Log in",
         author: "",
         description: "",

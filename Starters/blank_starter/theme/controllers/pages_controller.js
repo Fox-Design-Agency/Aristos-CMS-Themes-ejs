@@ -5,13 +5,23 @@ module.exports = {
   home(req, res, next) {
     const HomePage = FindPageWithParam({ slug: "home" });
     HomePage.then(page => {
-      res.render("../views/index", {
-        title: page[0].title,
-        content: page[0].content,
-        keywords: page[0].keywords,
-        description: page[0].description,
-        author: page[0].author
-      });
+      if (page.length < 1) {
+        res.render("../views/index", {
+          title: "",
+          content: "",
+          keywords: "",
+          description: "",
+          author: ""
+        });
+      } else {
+        res.render(`${page[0].template}`, {
+          title: page[0].title,
+          content: page[0].content,
+          keywords: page[0].keywords,
+          description: page[0].description,
+          author: page[0].author
+        });
+      }
     });
   }, // end of home function
 
@@ -22,13 +32,24 @@ module.exports = {
       if (page.length < 1) {
         res.redirect("/");
       } else {
-        res.render("index", {
-          title: page[0].title,
-          content: page[0].content,
-          keywords: page[0].keywords,
-          description: page[0].description,
-          author: page[0].author
-        });
+        if (typeof page[0].template !== "undefined") {
+          res.render(`${page[0].template}`, {
+            title: page[0].title,
+            content: page[0].content,
+            keywords: page[0].keywords,
+            description: page[0].description,
+            author: page[0].author
+          });
+        } else {
+          res.render("index"),
+            {
+              title: page[0].title,
+              content: page[0].content,
+              keywords: page[0].keywords,
+              description: page[0].description,
+              author: page[0].author
+            };
+        }
       }
     });
   } // end of any page function
